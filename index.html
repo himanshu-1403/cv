@@ -1,85 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>🔥Himanshu's Personal Site</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-
 <body>
-  <table cellspacing="20">
-    <tr>
-      <td><img src="https://smileworld.in/wp-content/uploads/2020/06/Cool-Boy-Hidden-Face-DP-Images-for-Whatsapp.jpg" alt="Himanshu's random image"></td>
-      <td><h1>Himanshu Nagpal</h1>
-      <p><em>Currently a student at <strong><a href="https://www.thapar.edu">Thapar University</a></strong></em></p>
-      <p>I am a believer and an enthusiast who trusts that he can acheive his goals in life.</p></td>
-    </tr>
-  </table>
-  <hr size="3" noshade>
-  <h3>Education</h3>
-  <ul>
-    <li>Btech Thapar University</li>
-    <li>XII DCM Presidency School</li>
-    <li>X DCM Presidency School</li>
-  </ul>
-  <hr size="2" noshade>
-  <h3>My Work Experience</h3>
-  <table border="1" cellspacing="10">
-    <thead>
-      <tr>
-        <th>Dates</th>
-        <th>Work</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>2010-2013</td>
-        <td>Developer at tempo app</td>
-      </tr>
-      <tr>
-        <td>2010</td>
-        <td>Research Intern at xyz technologies</td>
-      </tr>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td>That's</td>
-        <td>All</td>
-      </tr>
-    </tfoot>
-  </table>
-  <hr size="2" noshade>
-  <a href="My_hobbies.html">My Hobbies</a><br>
-  <a href="contact-details.html">My Contact Details</a>
-  <h3>Skills</h3>
-  <table border="1" cellspacing="10">
-    <tr>
-      <td>
-    <table>
-    <tr>
-      <td>C</td>
-      <td>⭐⭐⭐⭐</td>
-      </tr>
-      <tr>
-      <td>Compeering</td>
-      <td>⭐⭐⭐⭐⭐</td>
-    </tr>
-    </table>
-    </td>
-      <td>
-    <table>
-    <tr>
-      <td>C++</td>
-      <td>⭐⭐⭐⭐</td>
-      </tr>
-      <tr>
-      <td>Web Development</td>
-      <td>⭐⭐</td>
-    </tr>
-  </table>
-</td>
-  </tr>
-  </table>
-</body>
+    <h1 class="jumbotron text-center">AI Chatbot with Python</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3">
+            <div id="chatbox" class="border border-success">
+                <p class="botText"><span>Hi! I'm Chatterbot</span></p>
+            </div>
+            <div id="userInput">
+                <input id="textInput" class="form-control" type="text" name="msg" placeholder="Type Your Message Here">
+                <input id="buttonInput" class="btn btn-success form-control" type="submit" value="Send">
+            </div>
+        </div>
+    </div>
 
+<script>
+    function getResponse() {
+        let userText = $("#textInput").val();
+        let userHtml = '<p class="userText"><span>' + userText + '</span></p>';
+        $("#textInput").val("");
+        $("#chatbox").append(userHtml);
+        document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+        $.get("/get", { msg: userText }).done(function(data) {
+        var botHtml = '<p class="botText"><span>' + data + '</span></p>';
+        $("#chatbox").append(botHtml);
+        document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+});
+}
+    $("#textInput").keypress(function(e) {
+    //if enter key is pressed
+        if(e.which == 13) {
+            getResponse();
+        }
+    });
+    $("#buttonInput").click(function() {
+        getResponse();
+    });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</div>
+</body>
 </html>
